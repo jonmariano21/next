@@ -13,7 +13,7 @@
 		
 	</head>
 		
-	<body>
+	<body onload="load()">
 	
     <!-- NAVBAR
     ================================================== -->	
@@ -109,22 +109,22 @@
 								<form>
 									<h2> Get on the list </h2>
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Name" name="name">
+										<input class="form-control" id="nameField" type="text" placeholder="Name" name="name">
 									</div>
 									
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Lab Room #">
+										<input class="form-control" id="labNum" type="text" placeholder="Lab Room #">
 									</div>								
 									
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Terminal #">
+										<input class="form-control" id="terminalNum" type="text" placeholder="Terminal #">
 									</div>
 																
 								</form>
 							</div>
 							
 							<div class="modal-footer">
-								<button type="button" data-dismiss="modal" class="btn btn-success" data-value="1">Add Me</button>
+								<button id="addMe" type="button" data-dismiss="modal" class="btn btn-success" data-value="1" onclick="Javascript:addRow()">Add Me</button>
 							    <button type="button" data-dismiss="modal" class="btn" data-value="0">Cancel</button>
 							</div>
 							
@@ -173,33 +173,28 @@
 		
 		
 		
+	
 		
-<!--Practice-->
+    <!-- CSE 12 TABLE
+    ================================================== -->	
 	<div class="container">
-		<div class="row">
-			<div class="col-sm-4">	
-				<form>
-					<input id="nameField" type="text" placeholder="Name">
-				</form>
-				
-				<form>
-					<input id="labNum" type="text" placeholder="Lab #">
-				</form>				
-				
-				<button id="clickMe">Click ME</button>
-				<ol>
-					<li id="test"></li>
-					<li id="test2"></li>
-
-				</ol>			
-
-				
-			</div>
-		</div>
-	</div>	
+		<h1>CSE 12</h1>
 		
-
-
+		<table id="cse12Table" border="1" cellpadding="2">
+			<tr>
+			    <th class="col"><b>Position</b></th>
+				<th class="col"><b>Name</b></th>
+				<th class="col"><b>Lab Room Number</b></th>
+				<th class="col"><b>Terminal Number</b></th>
+				<th class="col"><b>Time</b></th>
+							
+			</tr>
+			
+		
+			
+		</table>
+	</div>
+		
 
 
 

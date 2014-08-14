@@ -55,3 +55,20 @@
   border-top-right-radius: 0;
 }
 */
+
+.col{
+	padding: 5px;
+	text-align: center;
+	background-color: #bcb8b8;
+	color: black;
+}
+
+#cse12Table{
+	border: 1px solid grey;
+	text-align: center;
+}
+
+tr{
+	background-color: #8AC007;
+	color: white;
+}

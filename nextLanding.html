@@ -3,6 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!--FIREBASE-->
+		<script src="https://cdn.firebase.com/js/client/1.0.19/firebase.js"></script>
 
 		<!-- CSS -->		
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -98,7 +101,7 @@
 					<h1 class="courseTitle">Cse 12</h1>
 				</div>
 								
-				<button class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Student</button>
+				<button class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Add Me to List</button>
 				
 				
 				
@@ -134,7 +137,7 @@
 				
 				
 				
-				<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Tutor</button>
+				<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Tutor Sign In</button>
 				
 				
 				<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -179,6 +182,7 @@
 						<th class="col">&nbsp</th>
 									
 					</tr>
+
 					
 				
 					
@@ -188,8 +192,19 @@
 		</div><!--close row-->	
 	</div><!-- close container-->	
 		
-		
-		
+	
+	
+<!-- ================================================================================================================================	-->	
+<br>	
+<br>
+<br>
+
+<table id="leaderboardTable"></table>
+<input type="text" id="nameInput" placeholder="Name">
+<input type="text" id="labNumInput" placeholder="Lab Room Number">
+<input type="text" id="terminalNumInput" placeholder="Terminal Number">
+
+
 	
 		
 
@@ -232,6 +247,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<script src="nextLanding.js"></script>
+		
+		<!--FIREBASE JS-->
+		<script src="https://cdn.firebase.com/js/client/1.0.19/firebase.js"></script>
+
 		
 	</body>
 </html>

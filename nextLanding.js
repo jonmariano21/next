@@ -91,6 +91,8 @@ function addRow(){
     newScoreRow.append($("<td/>").append($("<em/>").text(scoreSnapshot.val().name)));
     newScoreRow.append($("<td/>").text(scoreSnapshot.val().lab_number));
     newScoreRow.append($("<td/>").text(scoreSnapshot.val().terminal_number));
+    newScoreRow.append($("<td/>").text("fix this"));
+    newScoreRow.append($("<td/>").text("need button"));
     
     // Store a reference to the table row so we can get it again later.
     htmlForPath[scoreSnapshot.name()] = newScoreRow;
@@ -143,9 +145,9 @@ function addRow(){
     if (e.keyCode == 13) {
       var date = new Date();
       
-      var newScore = Number($("#labNumInput").val());
+      var newScore = Number($("#labNumInput").val());//has to be a NUMBER
       var name = $("#nameInput").val();
-      var terminal = $("#terminalNumInput").val();
+      var terminal = Number($("#terminalNumInput").val());//has to be a NUMBER
 
       
       //$("#terminalNumInput").val("");

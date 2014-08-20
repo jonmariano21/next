@@ -73,118 +73,108 @@ function addRow(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
  
- var LEADERBOARD_SIZE = 3;
+  var TABLE_SIZE = 3;
 
-  // Build some firebase references.
-  var rootRef = new Firebase("https://brilliant-fire-8581.firebaseIO.com");
-  var studentListRef = rootRef.child("students");
-  //var highestScoreRef = rootRef.child("highestScore");
+  //firebase references.
+  var myFB = new Firebase("https://brilliant-fire-8581.firebaseIO.com");
+  var studentListRef = myFB.child("students");
 
-  // Keep a mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
-  var htmlForPath = {};
+  //mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
+  var students = {};
 
-  // Helper function that takes a new score snapshot and adds an appropriate row to our leaderboard table.
-  function handleScoreAdded(scoreSnapshot) {
-    var newScoreRow = $("<tr/>");
+  //function that takes a new student snapshot and adds an appropriate row to table.
+  function addNewStudent(studentSnapshot) {
     
-    newScoreRow.append($("<td/>").text("fix this"));    
-    newScoreRow.append($("<td/>").append($("<em/>").text(scoreSnapshot.val().name)));
-    newScoreRow.append($("<td/>").text(scoreSnapshot.val().lab_number));
-    newScoreRow.append($("<td/>").text(scoreSnapshot.val().terminal_number));
-    newScoreRow.append($("<td/>").text("fix this"));
-    newScoreRow.append($("<td/>").text("need button"));
+   
+    var newRow = $("<tr/>");
     
-    // Store a reference to the table row so we can get it again later.
-    htmlForPath[scoreSnapshot.name()] = newScoreRow;
+    newRow.append($("<td/>").text("fix this"));    
+    newRow.append($("<td/>").text(studentSnapshot.val().NAME));
+    newRow.append($("<td/>").text(studentSnapshot.val().LAB_NUMBER));
+    newRow.append($("<td/>").text(studentSnapshot.val().TERMINAL_NUMBER));
     
-    $("#cse12Table").append(newScoreRow);
+    //append takes in a htmlstring so had to convert time as a number to a string using toString()
+    newRow.append($("<td/>").text(studentSnapshot.val().TIME));
+    
+    newRow.append($("<td/>").text("need button"));
+    
+    //Store student reference to the table row.
+    //students[studentSnapshot.name()] = newRow;
+    
+    $("#cse12Table").append(newRow);
 
-    // Insert the new score in the appropriate place in the table.
-    /*
-    if (prevScoreName === null) {
-      $("#leaderboardTable").append(newScoreRow);
-    }
-    else {
-      var lowerScoreRow = htmlForPath[prevScoreName];
-      lowerScoreRow.before(newScoreRow);
-    }
-    */
-  }
+  }//Close: addNewStudent(studentSnapshot)
 
-  // Helper function to handle a score object being removed; just removes the corresponding table row.
-/*  function handleScoreRemoved(scoreSnapshot) {
-    var removedScoreRow = htmlForPath[scoreSnapshot.name()];
-    removedScoreRow.remove();
-    delete htmlForPath[scoreSnapshot.name()];
-  }
-*/
-  // Create a view to only receive callbacks for the last LEADERBOARD_SIZE scores
-  var scoreListView = studentListRef.limit(LEADERBOARD_SIZE);
 
-  // Add a callback to handle when a new score is added.
-  scoreListView.on('child_added', function (newScoreSnapshot) {
-    handleScoreAdded(newScoreSnapshot);
+  // Create a view to only receive callbacks for the first students
+  var studentListView = studentListRef.startAt().limit(TABLE_SIZE);
+
+  //callback to handle when a new student is added.
+  studentListView.on('child_added', function (newstudentSnapshot) {
+    addNewStudent(newstudentSnapshot);
   });
 
-  // Add a callback to handle when a score is removed
-  /*scoreListView.on('child_removed', function (oldScoreSnapshot) {
-    handleScoreRemoved(oldScoreSnapshot);
-  });
 
-  // Add a callback to handle when a score changes or moves positions.
-  var changedCallback = function (scoreSnapshot) {
-    handleScoreRemoved(scoreSnapshot);
-    handleScoreAdded(scoreSnapshot);
-  };
-  
-  scoreListView.on('child_moved', changedCallback);
-  scoreListView.on('child_changed', changedCallback);
-*/
-  // When the user presses enter on scoreInput, add the score, and update the highest score.
-  $("#terminalNumInput").keypress(function (e) {
-    if (e.keyCode == 13) {
-      var date = new Date();
-      
-      var newScore = Number($("#labNumInput").val());//has to be a NUMBER
+  //Press button to add student to list.
+  $("#fuckMe").click(function(){
+    //$("#terminalNumInput").keypress(function (e) {
+     // if (e.keyCode == 13) {
+     
+     //getDate() returns the day of the month from (1-31)
+     //getTime() returns the number of milliseconds since midnight Jan 1, 1970
+     var timeStamp = new Date().getTime();
+     //alert("time in ms: "+timeStamp);
+     
+     //CONVERT the timeStamp number to a string
+     var timeString = timeStamp.toString();
+     //alert("time converted to string: "+timeString);
+
+      var labNum = Number( $("#labNumInput").val() );//has to be a NUMBER
       var name = $("#nameInput").val();
-      var terminal = Number($("#terminalNumInput").val());//has to be a NUMBER
+      var terminalNum = Number( $("#terminalNumInput").val() );//has to be a NUMBER
 
+      if (name.length === 0){
+      	alert("Please enter your NAME.")
+        return;
+      }
+
+      var studentRef = studentListRef.child(name);
+
+      // Use setWithPriority to put the name / lab# / terminal# in Firebase, and set the priority to be the time.
+      studentRef.setWithPriority({ NAME:name, LAB_NUMBER:labNum, TERMINAL_NUMBER:terminalNum, TIME:timeString },  timeString);
       
-      //$("#terminalNumInput").val("");
-
-      if (name.length === 0)
-        return;
-
-      var userScoreRef = studentListRef.child(name);
-
-      // Use setWithPriority to put the name / score in Firebase, and set the priority to be the score.
-      userScoreRef.setWithPriority({ name:name, lab_number:newScore, terminal_number:terminal }, name);
-
-      // Track the highest score using a transaction.  A transaction guarantees that the code inside the block is
-      // executed on the latest data from the server, so transactions should be used if you have multiple
-      // clients writing to the same data and you want to avoid conflicting changes.
-    /*  highestScoreRef.transaction(function (currentHighestScore) {
-        if (currentHighestScore === null || newScore > currentHighestScore) {
-          // The return value of this function gets saved to the server as the new highest score.
-          return newScore;
-        }
-        // if we return with no arguments, it cancels the transaction.
-        return;
-      });*/
-    }
   });
- 
 
-  // Add a callback to the highest score in Firebase so we can update the GUI any time it changes.
-/*  highestScoreRef.on('value', function (newHighestScore) {
-    $("#highestScoreDiv").text(newHighestScore.val());
-  });*/
+ 
+  function addDate(){
+	  var date = new Date();
+	  alert(date);
+  }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Helper function to handle a score object being removed; just removes the corresponding table row.
+/*  function handleScoreRemoved(studentSnapshot) {
+    var removedScoreRow = students[studentSnapshot.name()];
+    removedScoreRow.remove();
+    delete students[studentSnapshot.name()];
+  }
+*/
 
+  // Add a callback to handle when a score is removed
+  /*studentListView.on('child_removed', function (oldstudentSnapshot) {
+    handleScoreRemoved(oldstudentSnapshot);
+  });
 
-
+  // Add a callback to handle when a score changes or moves positions.
+  var changedCallback = function (studentSnapshot) {
+    handleScoreRemoved(studentSnapshot);
+    addNewStudent(studentSnapshot);
+  };
+  
+  studentListView.on('child_moved', changedCallback);
+  studentListView.on('child_changed', changedCallback);
+*/
 
 
 

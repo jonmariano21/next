@@ -3,8 +3,9 @@ var TABLE_SIZE = 3;//limit number of students displayed in table
 
 //FireBase reference
 var myFB = new Firebase("https://brilliant-fire-8581.firebaseIO.com");
-var studentListFB = myFB.child("students");
-//var studentRef = studentListFB.child("BOOO");
+var studentListFB = myFB.child("STuDenTs");
+
+var studentRef;
 
 //mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
 var students = {};
@@ -22,7 +23,6 @@ myFB.on("value", function(snapshot){
 		rowCounter += 1;
 	});
 });
-
 
 
 
@@ -63,6 +63,7 @@ function addNewStudent(studentSnapshot) {
 	$("#cse12Table").append(newRow);		
 	//$("#cse12Table").append("<tr id=id"+ snapshot.name() + ">" + one+two+three+four+five+six+ "</tr>");
 	
+	console.log("students ARRAY: "+students[0]);
 }//Close: addNewStudent(studentSnapshot)
 
 
@@ -95,49 +96,37 @@ $("#addMe").click(function(){
 		return;
 	}
 	
-	var studentRef = studentListFB.child(name);
+	studentRef = studentListFB.child(name);
 	
 	// Use setWithPriority to put the name / lab# / terminal# in Firebase, and set the priority to be the time.
 	studentRef.setWithPriority({ NAME:name, LAB_NUMBER:labNum, TERMINAL_NUMBER:terminalNum, TIME:timeString },  timeString);
+  
   
 });
 
 
 
-//FUNCTION: Delete Row
-//	delete row from table.
+//FUNCTION: Clear Entire Student WaitList
+//	delete all rows from table.
+//BUG--> does not clear rows from table unless page is refreshed 
 //===================================================================================================
 
-myFB.limit(20).on("child_removed", function (snapshot) {
-    alert("inside child_removed");
-
-    console.log('deleting ' + snapshot.name())
-    $('#id' + snapshot.name()).remove()
-     alert("END child_removed");
-});
-
-
-$(document).on('click', '.removeButton', function () {
-    
-    alert("lets delete");
-    
-    var id = studentListFB.name(); //Finds id = students to remove in FireBase
-    
-    alert("id = "+id);
+$(document).on('click', '.clearStudentList', function () {
      
-    myFB.child(id).once('value', function (snapshot) {
-    
-         alert("after child(id)");
-         
-        snapshot.ref().remove();
-        
-         alert("FINALLY REMOVE");
-		 
+    //var id = studentRef.name(); //id=name from name input
+    var id = studentListFB.name();//id=STuDenTs in FB
 
+    myFB.child(id).once('value', function (snapshot) { 
+        snapshot.ref().remove();
     });
 
 });
 
+myFB.limit(20).on("child_removed", function (snapshot) {
+    console.log('deleting ' + snapshot.name());
+    $( "#id" + snapshot.name() ).remove();
+});
+//==================================================================================================
 
 
 

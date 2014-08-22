@@ -1,3 +1,8 @@
+.col-sm-6{
+	background-color: #003399;
+	border-radius: 3%;
+}
+
 .course{
 	background-color: aqua;
 	border-radius: 5%;
@@ -12,11 +17,29 @@
 	
 }
 
-.waitlist{
-	text-align: center;
+h1 .btn-group { 
+	display: inline-block; 
+	float: right;
+	margin-top: 2px;
+	margin-right: 2px;
+	margin-bottom: 2px;
 }
 
 
+.addtowaitlistButton{
+	display: inline-block;
+}
+
+
+/*
+.waitlist{
+	text-align: center;
+}
+*/
+
+.waitlistTitle{
+	background-color: #FF4D4D;
+}
 
 
 .form-signin {
@@ -61,6 +84,32 @@
 }
 */
 
+.tutorTable{	
+	border: 1px solid grey;
+	text-align: center;	
+	margin-bottom: 30px;
+	width: 100%;
+}
+
+.tutorTableColumn{
+	padding: 5px;
+	text-align: center;	
+	background-color: #FBEFF5;
+	color: black;
+	
+}
+
+.tutorRow{
+	background-color: #ACACAE;
+}
+
+#cse12Table{
+	border: 1px solid grey;
+	text-align: center;
+	margin-bottom: 30px;
+	width: 100%;
+}
+
 .col{
 	padding: 5px;
 	text-align: center;
@@ -68,10 +117,6 @@
 	color: black;
 }
 
-#cse12Table{
-	border: 1px solid grey;
-	text-align: center;
-}
 
 tr{
 	background-color: #8AC007;

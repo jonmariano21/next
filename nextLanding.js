@@ -1,9 +1,12 @@
 
 var TABLE_SIZE = 3;//limit number of students displayed in table
 
-//FireBase reference
-var myFB = new Firebase("https://brilliant-fire-8581.firebaseIO.com");
-var studentListFB = myFB.child("STuDenTs");
+//FIREBASE Reference: 
+//===================================================================================================
+	var myFB = new Firebase("https://brilliant-fire-8581.firebaseIO.com");
+	var studentListFB = myFB.child("STuDenTs");//STuDenTs directory in FB
+
+
 
 var studentRef;
 
@@ -132,6 +135,232 @@ myFB.limit(20).on("child_removed", function (snapshot) {
 
 
 
+
+
+//LOGIN: 
+//===================================================================================================
+
+var emailField = $("#tutorEmailField");
+var passwordField = $("#tutorPasswordField");
+
+var myUser = -1;
+
+
+$(function() {
+
+	//========== Login USER ===========================================================================
+	$("#tutorLoginButton").click(function(){
+	
+		alert("Tutor login button clicked");
+		
+		var emAil = emailField.val();
+		var passWord = passwordField.val();
+		
+		alert("EmAiL: "+emAil+", "+"PaSsWoRd: "+passWord);
+		
+		doLogin(emAil, passWord);
+		
+		alert("End of doLogin()");
+	
+		/* Should be for Register Button b/c were trying to CREATE a user
+		authClient.createUser(email, password, function(error, user) {
+		
+			alert("Inside auth.createUser w/our email & password");
+			alert("email: "+email);
+			alert("password: "+password);
+			
+			alert("error: "+error);
+	
+			if (error === null) {
+				console.log("User created successfully:", user);
+				alert("User created successfully:", user);
+	
+			} else {
+				console.log("Error creating user:", error);
+				alert("Error creating user:", error);
+	
+			}
+		});
+		*/
+	});
+});
+
+function doLogin(emAil, passWord){
+
+	alert("Inside doLogin()");
+	
+	authClient.login("password",{
+		email: emAil,
+		password: passWord
+	});	
+};
+
+
+//========== MONITORING AUTHENTICATION ==============================================================
+
+/* Initialize Simple Login:
+ * First--> Create a FirebaseSimpleLogin object. This object takes in a Firebase reference 
+ *		and a callback function.
+ * 		The callback is triggered anytime that the user's authentication state is changed.
+ */
+ 
+var isNewUser = true;
+
+var authClient = new FirebaseSimpleLogin(myFB, function(error, user) { //myFB is FB reference declared at top of file
+
+alert("Inside FBSimpleLogin ");
+alert("UsEr: "+ user);
+alert("ErrOr: "+ error);
+
+  if (error) {
+    // an error occurred while attempting login
+    console.log("ErRoR: "+error);
+    alert("ErRoR: "+error);
+
+  } else if (user) {
+    // user authenticated with Firebase
+    console.log("User ID: " + user.uid + ", Provider: " + user.provider);
+    alert("User ID: " + user.uid + ", Provider: " + user.provider);
+    
+    console.log("LOGGED IN");
+    alert("LOGGED IN");
+    
+    myUser = user;
+    
+  } else {
+    // user is logged out
+    alert("LOGGED OUT HELP Mee AhHAHH");
+  }
+}); 
+
+
+/*
+var isNewUser = true;
+
+var authClient = new FirebaseSimpleLogin(loginFB, function(error, user) {
+  if (error) { ... }
+  else if (user) {
+    if( isNewUser ) {
+      // save new user's profile into Firebase so we can
+      // list users, use them in security rules, and show profiles
+      myFB.child('users').child(user.uid).set({
+        displayName: user.displayName,
+        provider: user.provider,
+        provider_id: user.id
+      });
+    }
+  }
+  else { ... }
+} 
+ 
+*/
+
+
+
+
+/* In addition to using the FirebaseSimpleLogin object, we can also use the Firebase API 
+ *		to monitor a user's authentication status. 
+ *		By attaching an event listener on the location /.info/authenticated we'll be able 
+ *			to observe any changes to a user's authentication status.
+ */
+ 
+/*
+var authRef = new Firebase("https://brilliant-fire-8581.firebaseIO.com/.info/authenticated");
+
+alert("authRef: "+authRef)
+
+authRef.on("value", function(snap) {
+ 
+  alert("SnAp: "+snap.val());
+
+  alert("Inside authRef function ");
+
+
+  if (snap.val() === true) {
+    alert("authenticated");
+  } else {
+    alert("not authenticated");
+  }
+});
+*/
+
+
+
+
+
+
+
+
+
+
+//========== LOGGING USERS IN  ======================================================================
+/*authClient.login("password",{
+	email: email,
+	password: password
+});
+*/
+
+
+
+/*
+function tutorLogin(email, password){
+
+	console.log("inside tutorLogin");
+	authClient.login('password', {
+		email: temail,
+		password: password
+	});
+	console.log("email: "+email+" "+ "password: "+password);
+
+};
+*/
+
+
+
+//========== STORING USER DATA  =====================================================================
+
+/* Internally, Simple Login generates JWT auth tokens after authenticating against the 
+ *		appropriate provider. It then calls Firebase.auth() with those tokens. 
+ *		It does not store profile or state information in Firebase. In order to persist user data 
+ *		we'll have to save it to our Firebase.
+ *	Saving a user when they log in through Simple Login:
+ */
+// we would probably save a profile when we register new users on our site
+// we could also read the profile to see if it's null
+// here we will just simulate this with an isNewUser boolean
+
+/*
+var isNewUser = true;
+
+var authClient = new FirebaseSimpleLogin(loginFB, function(error, user) {
+  if (error) { ... }
+  else if (user) {
+    if( isNewUser ) {
+      // save new user's profile into Firebase so we can
+      // list users, use them in security rules, and show profiles
+      myFB.child('users').child(user.uid).set({
+        displayName: user.displayName,
+        provider: user.provider,
+        provider_id: user.id
+      });
+    }
+  }
+  else { ... }
+} 
+ 
+*/
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 //REMOVE
 function removeButton(){
@@ -172,42 +401,7 @@ function removeButton(){
 
 
 
-/*
-var rowCount; 
 
-// ADD Row in Table
-================================================== 	//
-
-function addRow(){
-	
-	var date = new Date();//Creates obj w/current date and time
-	
-	var name = document.getElementById("nameField");
-	var labNum = document.getElementById("labNum");
-	var terminalNum = document.getElementById("terminalNum");
-	var table = document.getElementById("cse12Table");
-	
-	rowCount = table.rows.length;//number of rows
-	
-	var row = table.insertRow(rowCount);//insert new row into index of rowCount
-
-
-	row.insertCell(0).innerHTML = rowCount;
-	row.insertCell(1).innerHTML = name.value;
-	row.insertCell(2).innerHTML = labNum.value;
-	row.insertCell(3).innerHTML = terminalNum.value;
-	row.insertCell(4).innerHTML = date;
-	row.insertCell(5).innerHTML = '<button class="btn btn-danger" onclick="deleteRow(this)">Remove</button>';
-
-
-
-
-
-
-
-			
-}		
-*/
 
 
 
@@ -222,30 +416,6 @@ function addRow(){
 
 
 
-
-
-/*
-// Delete Row in Table
-================================================== 	//
-
-function deleteRow(object){
-
-alert("rowCount = "+rowCount);
-
-	var i = object.parentNode.parentNode.rowIndex;
-
-	document.getElementById("cse12Table").deleteRow(i);
-	
-	rowCount = rowCount - 1;
-alert("rowCount = "+rowCount);
-	
-
-
-}
-
-
-
-*/
 function load(){
 	console.log("page load finished bitch!");
 }

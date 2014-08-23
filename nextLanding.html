@@ -4,8 +4,10 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<!--FIREBASE-->
+		<!--FIREBASE REFERENCE-->
 		<script src="https://cdn.firebase.com/js/client/1.0.19/firebase.js"></script>
+		<script src="https://cdn.firebase.com/js/simple-login/1.6.3/firebase-simple-login.js"></script> <!--Installs Simple Login-->
+		
 
 		<!-- CSS -->		
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -39,12 +41,35 @@
 						</button>
 						
 						<!--BRAND-->
-						<a class="navbar-brand" href="#">next</a><!-- a tag is used for linking-->
+						<a class="navbar-brand" href="#">next</a><!-- a tag is used for linking-->		
+										
 					</div><!--close navbar-header-->
+					
+					<div class="navbar-collapse collapse">
+						<form class="navbar-form navbar-right" role="form">														
+							
+							<div class="form-group">
+								<input id="tutorEmailField" class="form-control" type="text" placeholder="email">
+							</div>
+							
+							<div class="form-group">
+								<input id="tutorPasswordField"class="form-control" type="password" placeholder="password">
+							</div>		
+												
+							<button id="tutorLoginButton" class="btn btn-primary" type="submit"> Tutor Login </button>
+							<button id="tutorLogoutButton" class="btn btn-danger" type="submit"> Tutor Logout </button>
+
+							
+						</form>							
+
+					</div><!--close navbar-collapse-->					
+					
 				</div><!--close container w/in navbar-->	
 			</nav>
 		</div><!--close container-->
 	</div><!--close navbar-wrapper-->
+
+
 
 		
     <!-- Carousel
@@ -95,18 +120,20 @@
     
     
 		
-	<!-- CLASS
+	<!-- CSE 12
 	================================================== 	-->	
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-6">
 			
 				<div class="course">
-					<h1 class="courseTitle">Cse 12
+					<h1 class="courseHeader">Cse 12
+						<!--
 						<span class="btn-group">
 							<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Tutor Sign In</button>
 
 						</span>
+						-->
 					</h1>
 				</div>
 				
@@ -165,10 +192,10 @@
 							
 			    <!-- CSE 12 Student List TABLE
 			    ================================================== 	-->
-				<div class="waitlistTitle">
-					<h1 class="courseTitle">Waitlist
+				<div class="waitlistDiv">
+					<h1 class="waitlistHeader">Waitlist
 						<span class="btn-group">
-							<button class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Add to List</button>
+							<button class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Add Me to List</button>
 
 						</span>
 					</h1>
@@ -240,6 +267,53 @@
 <br>	
 		
 -->
+<br>	
+<br>
+<br>
+
+<div class="container">
+    <p id="error"></p>
+    
+    <div id="login" class="view active">
+        <ul>
+            <li>
+                <input id="txtEmail" class="input-box" type="text" placeholder="Email" />
+            </li>
+            
+            <li>
+                <input id="txtPass" class="input-box" type="password" placeholder="Password" />
+            </li>
+            
+            <li>
+                <label for="chkRegister">
+                    <input id="chkRegister" type="checkbox" value="Register" checked /> Register
+                </label>
+            </li>
+            
+            <li>
+                <button id="btAction" class="btn">Register</button>
+            </li>
+        </ul>
+    </div>
+    
+    <div id="userInfo" class="view">
+        <h4>Users</h4>
+        <button id="btLogout" class="btn">Logout</button>
+        <ul id="userList">
+            
+        </ul>
+    </div>
+    
+</div>
+
+
+
+<!-- ================================================================================================================================	-->	
+
+
+
+
+
 
 	    <!-- MODALs
 	    ================================================== -->
@@ -265,7 +339,7 @@
 					</div>
 					
 					<div class="modal-footer">
-						<button id="addMe" type="button" data-dismiss="modal" class="btn btn-success" data-value="1" onclick="addRow()">Add Me</button>
+						<button id="addMe" type="button" data-dismiss="modal" class="btn btn-success" data-value="1" >Add Me</button>
 					    <button type="button" data-dismiss="modal" class="btn" data-value="0">Cancel</button>
 					</div>
 					
@@ -273,6 +347,7 @@
 			</div>
 		</div>
 		
+		<!--TUTOR MODAL SIGN IN
 		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -300,42 +375,28 @@
 				</div>
 			</div>
 		</div>	
-
-<!--navbar w/signin
-						<div class="navbar-collapse collapse">
-							<form class="navbar-form navbar-left" role="form">
-								<div class="form-group">
-									<input class="form-control" type="text" placeholder="Name">
-								</div>
-								
-								<div class="form-group">
-									<input class="form-control" type="text" placeholder="Lab Room #">
-								</div>								
-								
-								<div class="form-group">
-									<input class="form-control" type="text" placeholder="Terminal #">
-								</div>
-								
-								<button class="btn btn-success" type="submit"> Add Me </button>
-								
-							</form>
-							
-							<form class="navbar-form navbar-right" role="form">
-								<button class="btn btn-primary" type="submit"> Tutor Login </button>
-							
-							</form>
-						
-
-						</div><!--close navbar-collapse
--->	
-	
-		<!-- JavaScript -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="bootstrap/js/bootstrap.min.js"></script>
-		<script src="nextLanding.js"></script>
+		-->
 		
+
 		<!--FIREBASE JS-->
 		<script src="https://cdn.firebase.com/js/client/1.0.19/firebase.js"></script>
+
+
+		<!-- JavaScript -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		
+		<script src="https://code.jquery.com/jquery-2.1.0.min.js"></script><!--JS Fiddle EXample-->
+
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="nextLanding.js"></script>	
+		
+		<!-- AngularJS -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
+
+
+		<!-- AngularFire -->
+		<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
+
 
 		
 	</body>

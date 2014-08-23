@@ -17,6 +17,7 @@ var table = document.getElementById("cse12Table");
 var rowCount = table.rows.length;//number of rows
 */
 
+/*
 var rowCounter;
 
 //Count all children
@@ -26,7 +27,7 @@ myFB.on("value", function(snapshot){
 		rowCounter += 1;
 	});
 });
-
+*/
 
 
 
@@ -140,8 +141,8 @@ myFB.limit(20).on("child_removed", function (snapshot) {
 //LOGIN: 
 //===================================================================================================
 
-var emailField = $("#tutorEmailField");
-var passwordField = $("#tutorPasswordField");
+//var emailField = $("#tutorEmailField");
+//var passwordField = $("#tutorPasswordField");
 
 var myUser = -1;
 
@@ -153,8 +154,8 @@ $(function() {
 	
 		alert("Tutor login button clicked");
 		
-		var emAil = emailField.val();
-		var passWord = passwordField.val();
+		var emAil = $("#tutorEmailField").val();
+		var passWord = $("#tutorPasswordField").val();
 		
 		alert("EmAiL: "+emAil+", "+"PaSsWoRd: "+passWord);
 		
@@ -183,6 +184,12 @@ $(function() {
 		});
 		*/
 	});
+	
+	$("#tutorLogoutButton").click(function(){
+		alert("Tutor LOGOUT button clicked");
+		authClient.logout();
+	});
+	
 });
 
 function doLogin(emAil, passWord){

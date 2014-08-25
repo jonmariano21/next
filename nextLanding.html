@@ -20,305 +20,236 @@
 		
 	<body onload="load()">
 	
-    <!-- NAVBAR
-    ================================================== -->	
-    	
-    <div class="navbar-wrapper">
-		<div class="container">
+	
+	
 		
-			<!-- static-top makes navbar not whole width of screen
-				 fixed-top makes navbar the whole width of screen -->
-				 
-			<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-				<div class="container">
-					<div class="navbar-header">
-						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
+	<!-- Carousel
+	===========================================================================================================================================-->
+	    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+	      <!-- Indicators -->
+	      <ol class="carousel-indicators">
+	        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	        <li data-target="#myCarousel" data-slide-to="1"></li>
+	        <li data-target="#myCarousel" data-slide-to="2"></li>
+	      </ol>
+	      <div class="carousel-inner">
+	        <div class="item active">
+	          <img src="images/Math-Equations.jpg" alt="First slide">
+	          <div class="container">
+	            <div class="carousel-caption">
+	              <h1>Select a Course</h1>
+	              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
+	              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="item">
+	          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+	          <div class="container">
+	            <div class="carousel-caption">
+	              <h1>Add Yourself to the List</h1>
+	              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+	              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="item">
+	          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
+	          <div class="container">
+	            <div class="carousel-caption">
+	              <h1>THREE</h1>
+	              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+	              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+	      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+	    </div>
+	    <!--close carousel -->		
+	
+	
+	
+	
+	
+	
+	<!-- NAVBAR
+	======================================================================================================================================= -->	   	
+	    <div class="navbar-wrapper">
+			<div class="container">
+			
+				<!-- static-top makes navbar not whole width of screen
+					 fixed-top makes navbar the whole width of screen -->				 
+				<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+					<div class="container">
+						<div class="navbar-header">
+							<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								
+							</button>
 							
-						</button>
+							<!--BRAND-->
+							<a class="navbar-brand" href="#">next</a><!-- a tag is used for linking-->		
+											
+						</div><!--close navbar-header-->
 						
-						<!--BRAND-->
-						<a class="navbar-brand" href="#">next</a><!-- a tag is used for linking-->		
-										
-					</div><!--close navbar-header-->
-					
-					<div class="navbar-collapse collapse">
-						<form class="navbar-form navbar-right" role="form">														
-							
-							<div class="form-group">
-								<input id="tutorEmailField" class="form-control" type="text" placeholder="email">
-							</div>
-							
-							<div class="form-group">
-								<input id="tutorPasswordField"class="form-control" type="password" placeholder="password">
-							</div>		
-												
-							<button id="tutorLoginButton" class="btn btn-primary" type="submit"> Tutor Login </button>
-							<button id="tutorLogoutButton" class="btn btn-danger" type="submit"> Tutor Logout </button>
-
-							
-						</form>							
-
-					</div><!--close navbar-collapse-->					
-					
-				</div><!--close container w/in navbar-->	
-			</nav>
-		</div><!--close container-->
-	</div><!--close navbar-wrapper-->
+						<div class="navbar-collapse collapse">
+							<form class="navbar-form navbar-right" role="form">														
+								
+								<div class="form-group">
+									<input id="tutorEmailField" class="form-control" type="text" placeholder="email">
+								</div>
+								
+								<div class="form-group">
+									<input id="tutorPasswordField"class="form-control" type="password" placeholder="password">
+								</div>		
+													
+								<button id="tutorLoginButton" class="btn btn-primary" type="submit"> Tutor Login </button>
+								<button id="tutorLogoutButton" class="btn btn-danger" type="submit"> Tutor Logout </button>
+	
+								
+							</form>							
+	
+						</div><!--close navbar-collapse-->					
+						
+					</div><!--close container w/in navbar-->	
+				</nav>
+			</div><!--close container-->
+		</div><!--close navbar-wrapper-->
 
 
-
-		
-    <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="images/Math-Equations.jpg" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Select a Course</h1>
-              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Add Yourself to the List</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>THREE</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div>
-    <!--close carousel -->		
-    
-    
 		
 	<!-- CSE 12
-	================================================== 	-->	
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-6">
-			
-				<div class="course">
-					<h1 class="courseHeader">Cse 12
-						<!--
-						<span class="btn-group">
-							<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Tutor Sign In</button>
-
-						</span>
-						-->
-					</h1>
-				</div>
+	================================================== CSE 12 SECTION ============================================= 	-->	
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
 				
-				<!-- Tutor TABLE
-				================================================== 	-->	
-				<table class = "tutorTable" border="1" cellpadding="2">
-					<tr>
-						<th class="tutorTableColumn"> Tutor</th>
-						<th class="tutorTableColumn">Sun</th>
-						<th class="tutorTableColumn">Mon</th>
-						<th class="tutorTableColumn">Tue</th>
-						<th class="tutorTableColumn">Wed</th>
-						<th class="tutorTableColumn">Thur</th>
-						<th class="tutorTableColumn">Fri</th>
-						<th class="tutorTableColumn">Sat</th>												
-					</tr>
+					<div class="course">
+						<h1 class="courseHeader">Cse 12
+							<!--
+							<span class="btn-group">
+								<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Tutor Sign In</button>
+	
+							</span>
+							-->
+						</h1>
+					</div>
 					
-					<tr class="tutorRow">
-						<td>Jon</td>
-						<td></td>
-						<td></td>
-						<td>5-6pm</td>
-						<td></td>
-						<td>4-6pm</td>
-						<td></td>
-						<td></td>
+					<!-- Tutor TABLE
+					================================================== 	-->	
+					<table class = "tutorTable" border="1" cellpadding="2">
+						<tr>
+							<th class="tutorTableColumn"> Tutor</th>
+							<th class="tutorTableColumn">Sun</th>
+							<th class="tutorTableColumn">Mon</th>
+							<th class="tutorTableColumn">Tue</th>
+							<th class="tutorTableColumn">Wed</th>
+							<th class="tutorTableColumn">Thur</th>
+							<th class="tutorTableColumn">Fri</th>
+							<th class="tutorTableColumn">Sat</th>												
+						</tr>
 						
-					</tr>
-					<tr class="tutorRow">
-						<td>Christine</td>
-						<td>10-11am</td>
-						<td></td>
-						<td></td>
-						<td>9-11am</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						
-					</tr>					
-					<tr class="tutorRow">
-						<td>Mahi</td>
-						<td></td>
-						<td>5-7pm</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td>4-8pm</td>
-						<td></td>
-						
-					</tr>					
-					
-				</table>
-								
-
-				
+						<tr class="tutorRow">
+							<td>Jon</td>
+							<td></td>
+							<td></td>
+							<td>5-6pm</td>
+							<td></td>
+							<td>4-6pm</td>
+							<td></td>
+							<td></td>
 							
-			    <!-- CSE 12 Student List TABLE
-			    ================================================== 	-->
-				<div class="waitlistDiv">
-					<h1 class="waitlistHeader">Waitlist
-						<span class="btn-group">
-							<button class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Add Me to List</button>
-
-						</span>
-					</h1>
-					
-				</div>
-				
-				<table id="cse12Table" border="1" cellpadding="2">
-					<tr>
-					    <th class="col"><b> # </b></th>
-						<th class="col"><b>Name</b></th>
-						<th class="col"><b>Lab Room Number</b></th>
-						<th class="col"><b>Terminal Number</b></th>
-						<th class="col"><b>Time</b></th>
-						<th class="col">&nbsp</th>
+						</tr>
+						<tr class="tutorRow">
+							<td>Christine</td>
+							<td>10-11am</td>
+							<td></td>
+							<td></td>
+							<td>9-11am</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							
+						</tr>					
+						<tr class="tutorRow">
+							<td>Mahi</td>
+							<td></td>
+							<td>5-7pm</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>4-8pm</td>
+							<td></td>
+							
+						</tr>					
+						
+					</table>
 									
-					</tr>
-
-					
-				
-					
-				</table>
-				<button class="clearStudentList">clear list</button>
-				
-			</div><!--close col-->
-		</div><!--close row-->	
-	</div><!-- close container-->	
-		
 	
+					
+								
+				    <!-- CSE 12 Student List TABLE
+				    ================================================== 	-->
+					<div class="waitlistDiv">
+						<h1 class="waitlistHeader">Waitlist
+							<span class="btn-group">
+								<button class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Add Me to List</button>
 	
-<!-- ================================================================================================================================	-->	
-<!--
-<br>	
-<br>
-<br>
-
-<table id="leaderboardTable"></table>
-<input type="text" id="nameInput" placeholder="Name">
-<input type="text" id="labNumInput" placeholder="Lab Room Number">
-<input type="text" id="terminalNumInput" placeholder="Terminal Number">
-<button id="fuckMe" type="button" class="btn btn-success"  >fuck Me</button>
-
-
-
-<br>	
-<br>
-<br>
-
-
-
-<table id='thingList' class="table table-bordered">
-    <thead>
-        <tr>
-            <th><button class="addButton">ADD</button></th>
-            <th>
-                <input type='text' id='thingTitle' placeholder='Title'>
-            </th>
-                
-            <th> x </th>
-        </tr>
-   </thead>
-        <tbody>
-        </tbody>
-</table>
-
-
-
-<br>	
-<br>
-<br>	
+							</span>
+						</h1>
+						
+					</div>
+					
+					<table id="cse12Table" border="1" cellpadding="2">
+						<tr>
+						    <th class="col"><b> # </b></th>
+							<th class="col"><b>Name</b></th>
+							<th class="col"><b>Lab Room Number</b></th>
+							<th class="col"><b>Terminal Number</b></th>
+							<th class="col"><b>Time</b></th>
+							<th class="col"> <button class="btn btn-danger" id="clearStudentList" data-toggle="modal" data-target=".bs-example-modal-lg">Clear</button> </th>
+										
+						</tr>
+	
+						
+					
+						
+					</table>
+					<!--<button class="clearStudentList">clear list</button>-->
+					
+				</div><!--close col-->
+			</div><!--close row-->	
+		</div><!-- close container-->	
 		
-
-
-<br>	
-<br>
-<br>
-
-<div class="container">
-    <p id="error"></p>
-    
-    <div id="login" class="view active">
-        <ul>
-            <li>
-                <input id="txtEmail" class="input-box" type="text" placeholder="Email" />
-            </li>
-            
-            <li>
-                <input id="txtPass" class="input-box" type="password" placeholder="Password" />
-            </li>
-            
-            <li>
-                <label for="chkRegister">
-                    <input id="chkRegister" type="checkbox" value="Register" checked /> Register
-                </label>
-            </li>
-            
-            <li>
-                <button id="btAction" class="btn">Register</button>
-            </li>
-        </ul>
-    </div>
-    
-    <div id="userInfo" class="view">
-        <h4>Users</h4>
-        <button id="btLogout" class="btn">Logout</button>
-        <ul id="userList">
-            
-        </ul>
-    </div>
-    
-</div>
--->
-
-
-
-<!-- ================================================================================================================================	-->	
+<!-- PRACTICE
+==================================================== PRACTICE (PRACTICE) ================================================================= -->
+<br />
+<br />
+<br />
 
 
 
 
 
 
-	    <!-- MODALs
-	    ================================================== -->
+<!-- END END END PRACTICE
+==================================================== END END END ========================================================================= -->
+
+
+
+
+
+
+
+
+	<!-- MODALs
+	==================================================== MODALS (PopUps) ================================================================= -->
+	    <!-- ADD STUDENT: GET ON THE LIST -->
 		<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
@@ -349,35 +280,28 @@
 			</div>
 		</div>
 		
-		<!--TUTOR MODAL SIGN IN
+		<!-- CLEAR LIST: ARE YOU SURE YOU WANT TO CLEAR THE ENTIRE STUDENT LIST -->
 		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-body">
 					
-				      <form class="form-signin" role="form">
-				      
-				      		<h2 class="form-signin-heading">Tutor sign in</h2>
-				      	
-					  		<input type="email" class="form-control" placeholder="Email address">
-					  		<input type="password" class="form-control" placeholder="Password" required>
-					  	
-					  		<div class="checkbox">
-						 	 	<label>
-						 	 		<input type="checkbox" value="remember-me"> Remember me
-						 	 	</label>
-						 	 </div>
-						
-						 	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-						
-				      </form>
+				    	<form>
+							<h3> Are you sure you want to CLEAR the entire list of students?</h3>
+														
+						</form>
+					</div>
 					
+					<div class="modal-footer">
+						<button id="clearStudentList_YES" type="button" data-dismiss="modal" class="btn btn-success" data-value="1" >YES</button>
+					    <button type="button" data-dismiss="modal" class="btn btn-danger" data-value="0">NO</button>
+					</div>					
 					
 					</div>
 				</div>
 			</div>
 		</div>	
-		-->
+		
 		
 
 		<!--FIREBASE JS-->

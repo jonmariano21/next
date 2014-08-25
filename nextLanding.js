@@ -36,7 +36,7 @@ myFB.on("value", function(snapshot){
 //===================================================================================================
 function addNewStudent(studentSnapshot) {
 
-	var newRow = $("<tr id='id'/>");	
+	var newRow = $("<tr/>");	
 	
 	newRow.append($("<td/>").text("fix"));    
 	newRow.append($("<td/>").text(studentSnapshot.val().NAME));
@@ -46,7 +46,7 @@ function addNewStudent(studentSnapshot) {
 	//append takes in a htmlstring so have to convert time as a number to a string using toString()
 	newRow.append($("<td/>").text(studentSnapshot.val().TIME));
 	
-	newRow.append($("<td/>").innerHTML = '<button class="removeButton"> x </button>');
+	newRow.append($("<td/>").innerHTML = '<button class="removeButton" onclick="deleteThisRow()"> x </button>');
 
 	
 /*
@@ -63,7 +63,7 @@ function addNewStudent(studentSnapshot) {
 */	
 	//Store student reference to the table row.
 	students[studentSnapshot.name()] = newRow;
-	
+
 	$("#cse12Table").append(newRow);		
 	//$("#cse12Table").append("<tr id=id"+ snapshot.name() + ">" + one+two+three+four+five+six+ "</tr>");
 	
@@ -108,6 +108,12 @@ $("#addMe").click(function(){
   
 });
 
+function deleteThisRow(){
+	var par = $(this).parent().parent(); //tr
+	par.remove();
+}
+
+
 
 
 //FUNCTION: Clear Entire Student WaitList
@@ -115,7 +121,7 @@ $("#addMe").click(function(){
 //BUG--> does not clear rows from table unless page is refreshed 
 //===================================================================================================
 
-$(document).on('click', '.clearStudentList', function () {
+$(document).on('click', '#clearStudentList_YES', function () {
      
     //var id = studentRef.name(); //id=name from name input
     var id = studentListFB.name();//id=STuDenTs in FB
@@ -225,18 +231,30 @@ alert("ErrOr: "+ error);
     alert("ErRoR: "+error);
 
   } else if (user) {
-    // user authenticated with Firebase
+    // user is LOGGED in
     console.log("User ID: " + user.uid + ", Provider: " + user.provider);
     alert("User ID: " + user.uid + ", Provider: " + user.provider);
+    
+    myUser = user;
     
     console.log("LOGGED IN");
     alert("LOGGED IN");
     
-    myUser = user;
+    $("#tutorLoginButton").attr("disabled", true);//hides login button when logged in
+    $("#tutorLogoutButton").attr("disabled", false);//shows logout button when logged in
+    
+    $("#clearStudentList").attr("disabled", false);
+    
     
   } else {
     // user is logged out
     alert("LOGGED OUT HELP Mee AhHAHH");
+    $("#tutorLoginButton").attr("disabled", false);//shows logout button when logged out
+    $("#tutorLogoutButton").attr("disabled", true); //hides logout button when logged out 
+    
+    $("#clearStudentList").attr("disabled", true);
+  
+    
   }
 }); 
 
@@ -413,7 +431,10 @@ function removeButton(){
 
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////// PRACTICE PRACTICE ////////////////////////////////////////////////////////////////////
+
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -425,4 +446,6 @@ function removeButton(){
 
 function load(){
 	console.log("page load finished bitch!");
+	$("#clearStudentList").attr("disabled", true);
+
 }

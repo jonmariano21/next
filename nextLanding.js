@@ -8,9 +8,12 @@ var TABLE_SIZE = 3;//limit number of students displayed in table
 
 
 var studentRef = '';
+var studentName = '';
 
 //mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
 var students = {};
+
+//var queue = [];
 
 
 /*
@@ -55,10 +58,8 @@ $("#addMe").click(function(){
 		return;
 	}
 	
-	studentRef = studentListFB.child(name);
+	studentRef = studentListFB.child(name);//PATH to individual student in FB STuDenTs/name..
 	alert("studentRef = "+studentRef);
-
-	alert("studentRef.toString() = "+studentRef.toString());
 	
 	
 	// Use setWithPriority to put the name / lab# / terminal# in Firebase, and set the priority to be the time.
@@ -95,12 +96,12 @@ function addNewStudent(studentSnapshot, prevstudentSnapshot) {
 	
 */	
 
-	studentRef = studentSnapshot.name();
-	alert("studentRef = "+studentRef);
+	studentName = studentSnapshot.name();//Name of individual student
+	alert("studentName = "+studentName);
 		
 	//Store student reference to the table row.
-	alert("studentSnapshot.name() = "+studentSnapshot.name());
-	students[studentSnapshot.name()] = newRow;
+	students[studentName] = newRow;
+	
 	
 	$("#cse12Table").append(newRow);		
 	//$("#cse12Table").append("<tr id=id"+ snapshot.name() + ">" + one+two+three+four+five+six+ "</tr>");
@@ -123,21 +124,21 @@ studentListView.on('child_added', function (newstudentSnapshot, prevstudentSnaps
 function removeStudent(studentSnapshot) {
 	alert("Inside removeStudent(studentSnapshot)");
 	
-	alert("studentRef = "+studentRef);
+	alert("studentName = "+studentName);
 	//studentListFB == STuDenTs in FB
 	//studentRef == name that is typed into field
-	studentListFB.child(studentRef).once('value', function(snapshot){
+	studentListFB.child(studentName).on('value', function(snapshot){
 		snapshot.ref().remove();
 	});
 	
 	
 }
-
+/*
 // Add a callback to handle when a score is removed
 studentListView.on('child_removed', function (oldstudentSnapshot) {
 	removeStudent(oldstudentSnapshot);
 });
-
+*/
 
 
 //FUNCTION: Clear Entire Student WaitList

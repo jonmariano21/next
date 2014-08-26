@@ -3,6 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!--FIREBASE REFERENCE-->
+		<script src="https://cdn.firebase.com/js/client/1.0.19/firebase.js"></script>
+		<script src="https://cdn.firebase.com/js/simple-login/1.6.3/firebase-simple-login.js"></script> <!--Installs Simple Login-->
+		
 
 		<!-- CSS -->		
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -15,226 +20,310 @@
 		
 	<body onload="load()">
 	
-    <!-- NAVBAR
-    ================================================== -->	
-    	
-    <div class="navbar-wrapper">
-		<div class="container">
-		
-			<!-- static-top makes navbar not whole width of screen
-				 fixed-top makes navbar the whole width of screen -->
-				 
-			<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-				<div class="container">
-					<div class="navbar-header">
-						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							
-						</button>
-						
-						<!--BRAND-->
-						<a class="navbar-brand" href="#">next</a><!-- a tag is used for linking-->
-					</div><!--close navbar-header-->
-				</div><!--close container w/in navbar-->	
-			</nav>
-		</div><!--close container-->
-	</div><!--close navbar-wrapper-->
-
-		
-    <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Select a Course</h1>
-              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Add Yourself to the List</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>THREE</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div>
-    <!--close carousel -->		
-		
-		
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-4">
-				<div class="course">
-					<h1 class="courseTitle">Cse 12</h1>
-				</div>
-								
-				<button class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Student</button>
-				
-				
-				
-				<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-sm">
-						<div class="modal-content">
-							<div class="modal-body">
-								<form>
-									<h2> Get on the list </h2>
-									<div class="form-group">
-										<input class="form-control" id="nameField" type="text" placeholder="Name" name="name">
-									</div>
-									
-									<div class="form-group">
-										<input class="form-control" id="labNum" type="text" placeholder="Lab Room #">
-									</div>								
-									
-									<div class="form-group">
-										<input class="form-control" id="terminalNum" type="text" placeholder="Terminal #">
-									</div>
-																
-								</form>
-							</div>
-							
-							<div class="modal-footer">
-								<button id="addMe" type="button" data-dismiss="modal" class="btn btn-success" data-value="1" onclick="Javascript:addRow()">Add Me</button>
-							    <button type="button" data-dismiss="modal" class="btn" data-value="0">Cancel</button>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-				
-				
-				
-				<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Tutor</button>
-				
-				
-				<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
-							<div class="modal-body">
-							
-						      <form class="form-signin" role="form">
-						      
-						      		<h2 class="form-signin-heading">Tutor sign in</h2>
-						      	
-							  		<input type="email" class="form-control" placeholder="Email address">
-							  		<input type="password" class="form-control" placeholder="Password" required>
-							  	
-							  		<div class="checkbox">
-								 	 	<label>
-								 	 		<input type="checkbox" value="remember-me"> Remember me
-								 	 	</label>
-								 	 </div>
-								
-								 	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-								
-						      </form>
-							
-							
-							</div>
-						</div>
-					</div>
-				</div>	
-				
-				
-				
-			</div><!--close col-->
-		</div><!--close row-->	
-	</div><!-- close container-->	
-		
-		
-		
+	
 	
 		
-    <!-- CSE 12 TABLE
-    ================================================== -->	
-	<div class="container">
-		<h1>CSE 12</h1>
-		
-		<table id="cse12Table" border="1" cellpadding="2">
-			<tr>
-			    <th class="col"><b>Position</b></th>
-				<th class="col"><b>Name</b></th>
-				<th class="col"><b>Lab Room Number</b></th>
-				<th class="col"><b>Terminal Number</b></th>
-				<th class="col"><b>Time</b></th>
+	<!-- Carousel
+	===========================================================================================================================================-->
+	    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+	      <!-- Indicators -->
+	      <ol class="carousel-indicators">
+	        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	        <li data-target="#myCarousel" data-slide-to="1"></li>
+	        <li data-target="#myCarousel" data-slide-to="2"></li>
+	      </ol>
+	      <div class="carousel-inner">
+	        <div class="item active">
+	          <img src="images/Math-Equations.jpg" alt="First slide">
+	          <div class="container">
+	            <div class="carousel-caption">
+	              <h1>Select a Course</h1>
+	              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
+	              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="item">
+	          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+	          <div class="container">
+	            <div class="carousel-caption">
+	              <h1>Add Yourself to the List</h1>
+	              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+	              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="item">
+	          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
+	          <div class="container">
+	            <div class="carousel-caption">
+	              <h1>THREE</h1>
+	              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+	              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+	      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+	    </div>
+	    <!--close carousel -->		
+	
+	
+	
+	
+	
+	
+	<!-- NAVBAR
+	======================================================================================================================================= -->	   	
+	    <div class="navbar-wrapper">
+			<div class="container">
+			
+				<!-- static-top makes navbar not whole width of screen
+					 fixed-top makes navbar the whole width of screen -->				 
+				<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+					<div class="container">
+						<div class="navbar-header">
+							<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								
+							</button>
 							
-			</tr>
-			
-		
-			
-		</table>
-	</div>
-		
-
-
-
-
-
-
-
-
-<!--navbar w/signin
+							<!--BRAND-->
+							<a class="navbar-brand" href="#">next</a><!-- a tag is used for linking-->		
+											
+						</div><!--close navbar-header-->
+						
 						<div class="navbar-collapse collapse">
-							<form class="navbar-form navbar-left" role="form">
+							<form class="navbar-form navbar-right" role="form">														
+								
 								<div class="form-group">
-									<input class="form-control" type="text" placeholder="Name">
+									<input id="tutorEmailField" class="form-control" type="text" placeholder="email">
 								</div>
 								
 								<div class="form-group">
-									<input class="form-control" type="text" placeholder="Lab Room #">
-								</div>								
-								
-								<div class="form-group">
-									<input class="form-control" type="text" placeholder="Terminal #">
-								</div>
-								
-								<button class="btn btn-success" type="submit"> Add Me </button>
-								
-							</form>
-							
-							<form class="navbar-form navbar-right" role="form">
-								<button class="btn btn-primary" type="submit"> Tutor Login </button>
-							
-							</form>
-						
-
-						</div><!--close navbar-collapse
--->	
+									<input id="tutorPasswordField"class="form-control" type="password" placeholder="password">
+								</div>		
+													
+								<button id="tutorLoginButton" class="btn btn-primary" type="submit"> Tutor Login </button>
+								<button id="tutorLogoutButton" class="btn btn-danger" type="submit"> Tutor Logout </button>
 	
+								
+							</form>							
+	
+						</div><!--close navbar-collapse-->					
+						
+					</div><!--close container w/in navbar-->	
+				</nav>
+			</div><!--close container-->
+		</div><!--close navbar-wrapper-->
+
+
+		
+	<!-- CSE 12
+	================================================== CSE 12 SECTION ============================================= 	-->	
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+				
+					<div class="course">
+						<h1 class="courseHeader">Cse 12
+							<!--
+							<span class="btn-group">
+								<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Tutor Sign In</button>
+	
+							</span>
+							-->
+						</h1>
+					</div>
+					
+					<!-- Tutor TABLE
+					================================================== 	-->	
+					<table class = "tutorTable" border="1" cellpadding="2">
+						<tr>
+							<th class="tutorTableColumn"> Tutor</th>
+							<th class="tutorTableColumn">Sun</th>
+							<th class="tutorTableColumn">Mon</th>
+							<th class="tutorTableColumn">Tue</th>
+							<th class="tutorTableColumn">Wed</th>
+							<th class="tutorTableColumn">Thur</th>
+							<th class="tutorTableColumn">Fri</th>
+							<th class="tutorTableColumn">Sat</th>												
+						</tr>
+						
+						<tr class="tutorRow">
+							<td>Jon</td>
+							<td></td>
+							<td></td>
+							<td>5-6pm</td>
+							<td></td>
+							<td>4-6pm</td>
+							<td></td>
+							<td></td>
+							
+						</tr>
+						<tr class="tutorRow">
+							<td>Christine</td>
+							<td>10-11am</td>
+							<td></td>
+							<td></td>
+							<td>9-11am</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							
+						</tr>					
+						<tr class="tutorRow">
+							<td>Mahi</td>
+							<td></td>
+							<td>5-7pm</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>4-8pm</td>
+							<td></td>
+							
+						</tr>					
+						
+					</table>
+									
+	
+					
+								
+				    <!-- CSE 12 Student List TABLE
+				    ================================================== 	-->
+					<div class="waitlistDiv">
+						<h1 class="waitlistHeader">Waitlist
+							<span class="btn-group">
+								<button class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Add Me to List</button>
+	
+							</span>
+						</h1>
+						
+					</div>
+					
+					<table id="cse12Table" border="1" cellpadding="2">
+						<tr>
+						    <th class="col"><b> # </b></th>
+							<th class="col"><b>Name</b></th>
+							<th class="col"><b>Lab Room Number</b></th>
+							<th class="col"><b>Terminal Number</b></th>
+							<th class="col"><b>Time</b></th>
+							<th class="col"> <button class="btn btn-danger" id="clearStudentList" data-toggle="modal" data-target=".bs-example-modal-lg">Clear</button> </th>
+										
+						</tr>
+	
+						
+					
+						
+					</table>
+					<!--<button class="clearStudentList">clear list</button>-->
+					
+				</div><!--close col-->
+			</div><!--close row-->	
+		</div><!-- close container-->	
+		
+<!-- PRACTICE
+==================================================== PRACTICE (PRACTICE) ================================================================= -->
+<br />
+<br />
+<br />
+
+
+
+
+
+
+<!-- END END END PRACTICE
+==================================================== END END END ========================================================================= -->
+
+
+
+
+
+
+
+
+	<!-- MODALs
+	==================================================== MODALS (PopUps) ================================================================= -->
+	    <!-- ADD STUDENT: GET ON THE LIST -->
+		<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-body">
+						<form>
+							<h3> Get on the list </h3>
+							<div class="form-group">
+								<input class="form-control" id="nameField" type="text" placeholder="Name" name="name">
+							</div>
+							
+							<div class="form-group">
+								<input class="form-control" id="labNum" type="text" placeholder="Lab Room #">
+							</div>								
+							
+							<div class="form-group">
+								<input class="form-control" id="terminalNum" type="text" placeholder="Terminal #">
+							</div>
+														
+						</form>
+					</div>
+					
+					<div class="modal-footer">
+						<button id="addMe" type="button" data-dismiss="modal" class="btn btn-success" data-value="1" >Add Me</button>
+					    <button type="button" data-dismiss="modal" class="btn" data-value="0">Cancel</button>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<!-- CLEAR LIST: ARE YOU SURE YOU WANT TO CLEAR THE ENTIRE STUDENT LIST -->
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-body">
+					
+				    	<form>
+							<h3> Are you sure you want to CLEAR the entire list of students?</h3>
+														
+						</form>
+					</div>
+					
+					<div class="modal-footer">
+						<button id="clearStudentList_YES" type="button" data-dismiss="modal" class="btn btn-success" data-value="1" >YES</button>
+					    <button type="button" data-dismiss="modal" class="btn btn-danger" data-value="0">NO</button>
+					</div>					
+					
+					</div>
+				</div>
+			</div>
+		</div>	
+		
+		
+
+		<!--FIREBASE JS-->
+		<script src="https://cdn.firebase.com/js/client/1.0.19/firebase.js"></script>
+
+
 		<!-- JavaScript -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		
+		<script src="https://code.jquery.com/jquery-2.1.0.min.js"></script><!--JS Fiddle EXample-->
+
 		<script src="bootstrap/js/bootstrap.min.js"></script>
-		<script src="nextLanding.js"></script>
+		<script src="nextLanding.js"></script>	
+		
+		<!-- AngularJS -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
+
+
+		<!-- AngularFire -->
+		<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
+
+
 		
 	</body>
 </html>

@@ -1,19 +1,106 @@
+/* ROW & COL
+======================================================================================== */
+tr{
+	background-color: #8AC007;
+	color: white;
+}
+
+.col-sm-6{
+	background-color: #003399; /*dark Blue background color of entire COL*/
+	border-radius: 3%;
+}
+
+
+
+/* COURSE
+======================================================================================== */
 .course{
 	background-color: aqua;
-	border-radius: 25%;
-	width: 140px; 
-	height: 140px;
+	border-radius: 5%;
+	max-width: 100%; 
+	max-height: 100%;
 	margin-bottom: 5px;
 }
-.courseTitle{
-	margin-left: 10px;
-	padding-top: 50px;
+.courseHeader{
+	text-align: center;
 	
 }
 
 
 
 
+
+/* TUTOR
+======================================================================================== */
+.tutorTable{	
+	border: 1px solid grey;
+	text-align: center;	
+	margin-bottom: 30px;
+	width: 100%;
+}
+
+.tutorTableColumn{
+	padding: 5px;
+	text-align: center;	
+	background-color: #FBEFF5;
+	color: black;
+	
+}
+
+.tutorRow{
+	background-color: #ACACAE;
+}
+
+
+
+
+
+/* WaitList
+======================================================================================== */
+.waitlistDiv{
+	background-color: #FF4D4D;
+	
+}
+
+.waitlistHeader{
+	text-align: center;
+	margin-left: 22%; /*Centers text with button on right, text-align:center; centers, but centers from button*/
+}
+
+
+h1 .btn-group { 
+	display: inline-block; 
+	float: right;
+	margin-top: 2px;
+	margin-right: 2px;
+	margin-bottom: 2px;
+}
+
+
+
+
+
+/* cse 12 TABLE
+======================================================================================== */
+#cse12Table{
+	border: 1px solid grey;
+	text-align: center;
+	margin-bottom: 30px;
+	width: 100%;
+}
+
+.col{
+	padding: 5px;
+	text-align: center;
+	background-color: #bcb8b8;
+	color: black;
+}
+
+
+
+
+/* OTHER
+======================================================================================== */
 .form-signin {
   max-width: 225px;
   padding: 5px;
@@ -21,6 +108,12 @@
 
 }
 
+
+
+
+
+
+/*****************************************************************************/
 /*
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
@@ -56,19 +149,55 @@
 }
 */
 
-.col{
-	padding: 5px;
-	text-align: center;
-	background-color: #bcb8b8;
-	color: black;
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************* JS Fiddle Shit ****************************************************/
+
+
+.container {
+    
 }
 
-#cse12Table{
-	border: 1px solid grey;
-	text-align: center;
+#error {
+    color: #f00;
+    font-weight: bold;
 }
 
-tr{
-	background-color: #8AC007;
-	color: white;
+
+.input-box {
+    width: 100%;
+    height: 40px;
+}
+
+
+.container ul {
+    list-style-type: none;
+    padding: 20px;
+}
+
+.container ul li {
+    margin-bottom: 5px;
+}
+
+.container ul .input-box {
+    margin-bottom: 10px;
+}
+
+.view {
+    display: none;
+}
+
+.view.active {
+    display: block;
 }

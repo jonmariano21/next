@@ -7,11 +7,12 @@ var TABLE_SIZE = 3;//limit number of students displayed in table
 	var studentListFB = myFB.child("STuDenTs");//STuDenTs directory in FB
 
 
-
-var studentRef;
+var studentRef = '';
 
 //mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
 var students = {};
+
+
 /*
 var table = document.getElementById("cse12Table");
 var rowCount = table.rows.length;//number of rows
@@ -34,56 +35,10 @@ myFB.on("value", function(snapshot){
 //FUNCTION: 
 //	takes a new student snapshot and adds an appropriate row to table.
 //===================================================================================================
-function addNewStudent(studentSnapshot) {
-
-	var newRow = $("<tr/>");	
-	
-	newRow.append($("<td/>").text("fix"));    
-	newRow.append($("<td/>").text(studentSnapshot.val().NAME));
-	newRow.append($("<td/>").text(studentSnapshot.val().LAB_NUMBER));
-	newRow.append($("<td/>").text(studentSnapshot.val().TERMINAL_NUMBER));
-	
-	//append takes in a htmlstring so have to convert time as a number to a string using toString()
-	newRow.append($("<td/>").text(studentSnapshot.val().TIME));
-	
-	newRow.append($("<td/>").innerHTML = '<button class="removeButton" onclick="deleteThisRow()"> x </button>');
-
-	
-/*
-	var one = "<td>fix</td>";    
-	var two = "<td>"+studentSnapshot.val().NAME+"</td>";
-	var three = "<td>" + studentSnapshot.val().LAB_NUMBER + "</td>";
-	var four = "<td>" + studentSnapshot.val().TERMINAL_NUMBER + "</td>";
-	
-	//append takes in a htmlstring so have to convert time as a number to a string using toString()
-	var five = "<td>" + studentSnapshot.val().TIME + "</td>";
-	
-	var six = "<td class='removeButton'> x </td>";
-	
-*/	
-	//Store student reference to the table row.
-	students[studentSnapshot.name()] = newRow;
-
-	$("#cse12Table").append(newRow);		
-	//$("#cse12Table").append("<tr id=id"+ snapshot.name() + ">" + one+two+three+four+five+six+ "</tr>");
-	
-	console.log("students ARRAY: "+students[0]);
-}//Close: addNewStudent(studentSnapshot)
-
-
-// Create a view to only receive callbacks for the first students
-var studentListView = studentListFB.startAt().limit(TABLE_SIZE);
-
-//callback to handle when a new student is added.
-studentListView.on('child_added', function (newstudentSnapshot) {
-	addNewStudent(newstudentSnapshot);
-
-});
-
 
 //Press button to add student to list.
 $("#addMe").click(function(){
- 	 
+ 	alert("addMe button clicked");
 	//getDate() returns the day of the month from (1-31)
 	//getTime() returns the number of milliseconds since midnight Jan 1, 1970
 	var timeStamp = new Date().getTime();
@@ -101,6 +56,10 @@ $("#addMe").click(function(){
 	}
 	
 	studentRef = studentListFB.child(name);
+	alert("studentRef = "+studentRef);
+
+	alert("studentRef.toString() = "+studentRef.toString());
+	
 	
 	// Use setWithPriority to put the name / lab# / terminal# in Firebase, and set the priority to be the time.
 	studentRef.setWithPriority({ NAME:name, LAB_NUMBER:labNum, TERMINAL_NUMBER:terminalNum, TIME:timeString },  timeString);
@@ -108,11 +67,76 @@ $("#addMe").click(function(){
   
 });
 
-function deleteThisRow(){
-	var par = $(this).parent().parent(); //tr
-	par.remove();
+function addNewStudent(studentSnapshot, prevstudentSnapshot) {
+	alert("Inside addNewStudent(studentSnapshot):: studentSnapshot.name() = "+studentSnapshot.name());
+	var newRow = $("<tr/>");	
+	
+	newRow.append($("<td/>").text("fix"));    
+	newRow.append($("<td/>").text(studentSnapshot.val().NAME));
+	newRow.append($("<td/>").text(studentSnapshot.val().LAB_NUMBER));
+	newRow.append($("<td/>").text(studentSnapshot.val().TERMINAL_NUMBER));
+	
+	//append takes in a htmlstring so have to convert time as a number to a string using toString()
+	newRow.append($("<td/>").text(studentSnapshot.val().TIME));
+	
+	newRow.append($("<td/>").innerHTML = '<button id="removeButton" onclick="removeStudent()"> x </button>');
+
+	
+/*
+	var one = "<td>fix</td>";    
+	var two = "<td>"+studentSnapshot.val().NAME+"</td>";
+	var three = "<td>" + studentSnapshot.val().LAB_NUMBER + "</td>";
+	var four = "<td>" + studentSnapshot.val().TERMINAL_NUMBER + "</td>";
+	
+	//append takes in a htmlstring so have to convert time as a number to a string using toString()
+	var five = "<td>" + studentSnapshot.val().TIME + "</td>";
+	
+	var six = "<td class='removeButton'> x </td>";
+	
+*/	
+
+	studentRef = studentSnapshot.name();
+	alert("studentRef = "+studentRef);
+		
+	//Store student reference to the table row.
+	alert("studentSnapshot.name() = "+studentSnapshot.name());
+	students[studentSnapshot.name()] = newRow;
+	
+	$("#cse12Table").append(newRow);		
+	//$("#cse12Table").append("<tr id=id"+ snapshot.name() + ">" + one+two+three+four+five+six+ "</tr>");
+	
+}//Close: addNewStudent(studentSnapshot)
+
+
+// Create a view to only receive callbacks for the first students
+var studentListView = studentListFB.startAt().limit(TABLE_SIZE);
+
+//callback to handle when a new student is added.
+studentListView.on('child_added', function (newstudentSnapshot, prevstudentSnapshot) {
+	addNewStudent(newstudentSnapshot, prevstudentSnapshot);
+
+});
+
+
+
+
+function removeStudent(studentSnapshot) {
+	alert("Inside removeStudent(studentSnapshot)");
+	
+	alert("studentRef = "+studentRef);
+	//studentListFB == STuDenTs in FB
+	//studentRef == name that is typed into field
+	studentListFB.child(studentRef).once('value', function(snapshot){
+		snapshot.ref().remove();
+	});
+	
+	
 }
 
+// Add a callback to handle when a score is removed
+studentListView.on('child_removed', function (oldstudentSnapshot) {
+	removeStudent(oldstudentSnapshot);
+});
 
 
 
